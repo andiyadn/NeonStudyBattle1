@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Neon Study Battle</title>
+
+<style>
+body{
+margin:0;
+font-family:tahoma;
+background:#0b0b14;
+color:white;
+direction:rtl;
+}
+
+.container{padding:15px;}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:15px;
+padding:15px;
+margin-top:15px;
+box-shadow:0 0 15px rgba(128,0,255,0.3);
+}
+
+.title{color:#b84dff;font-weight:bold;}
+
+.vs{
+text-align:center;
+font-size:22px;
+color:#ff4df0;
+margin:10px 0;
+}
+
+.progress{
+height:10px;
+background:#222;
+border-radius:10px;
+overflow:hidden;
+margin-top:5px;
+}
+
+.bar{
+height:100%;
+background:linear-gradient(90deg,#b84dff,#4dd2ff);
+width:0%;
+}
+
+button{
+padding:10px;
+border:none;
+border-radius:10px;
+margin:5px;
+color:white;
+cursor:pointer;
+}
+
+.start{background:green;}
+.pause{background:orange;}
+.stop{background:red;}
+
+.shop{
+display:flex;
+justify-content:space-around;
+flex-wrap:wrap;
+}
+
+.item{
+background:#111;
+padding:10px;
+border-radius:10px;
+margin:5px;
+text-align:center;
+width:45%;
+border:1px solid #333;
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+display:flex;
+justify-content:space-around;
+background:#111;
+padding:10px;
+border-top:1px solid #333;
+}
+
+.nav-item{color:#aaa;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<div>⚔️ NEON STUDY BATTLE</div>
+<div>Level 1</div>
+</div>
+
+<div class="card">
+<div class="row">
+<div>آندیا - 0💰</div>
+<div>آیدا - 0💰</div>
+</div>
+
+<div class="vs">VS</div>
+
+<div class="progress">
+<div class="bar"></div>
+</div>
+</div>
+
+<div class="card">
+<div class="title">⏱ تایمر مطالعه</div>
+<h2 id="timer">00:00</h2>
+
+<button class="start" onclick="startTimer()">شروع</button>
+<button class="pause" onclick="pauseTimer()">توقف</button>
+<button class="stop" onclick="resetTimer()">ریست</button>
+</div>
+
+<div class="card">
+<div class="title">🛒 فروشگاه</div>
+<div class="shop">
+
+<div class="item">☕ 10 دقیقه استراحت<br>10💰</div>
+<div class="item">🛡 ضد سرقت سکه<br>30💰</div>
+<div class="item">⚡ ضرب 2 امتیاز<br>50💰</div>
+<div class="item">💀 حذف سکه رقیب<br>75💰</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="bottom-nav">
+<div class="nav-item">خانه</div>
+<div class="nav-item">دستاورد</div>
+<div class="nav-item">فروشگاه</div>
+<div class="nav-item">پروفایل</div>
+</div>
+
+<script>
+
+let time = 0;
+let interval = null;
+
+function update(){
+let m = Math.floor(time/60);
+let s = time%60;
+document.getElementById("timer").innerText =
+`${m}:${s < 10 ? "0"+s : s}`;
+}
+
+function startTimer(){
+if(interval) return;
+interval = setInterval(()=>{
+time++;
+update();
+},1000);
+}
+
+function pauseTimer(){
+clearInterval(interval);
+interval = null;
+}
+
+function resetTimer(){
+time = 0;
+update();
+pauseTimer();
+}
+
+update();
+
+</script>
+
+</body>
+</html>
